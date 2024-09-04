@@ -2,9 +2,6 @@
 HYPER = {'ctrl', 'shift', 'alt', 'cmd'}
 CCS = {'ctrl', 'shift', 'cmd'}
 
-
-
-
 hs.loadSpoon("SpoonInstall")
 Install=spoon.SpoonInstall
 
@@ -27,7 +24,6 @@ Install:andUse("AppWindowSwitcher", {
         "Chromium"}]       = {HYPER, "s"},
         [{"O", "o"}]       = {HYPER, "o"},
         [{"Code"}]       = {HYPER, "e"},
-        [{"Finder"}]       = {HYPER, "a"},
         [{"Obsidian"}]     = {HYPER, "n"},
     }})
 
@@ -39,6 +35,8 @@ Install:andUse("AppLauncher", {
         z = "Zoom.us",
         t = "iTerm2",
         c = "Calendar",
+        a = "Finder",
+        m = "Mail",
     }
 })
 
