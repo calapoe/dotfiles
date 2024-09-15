@@ -1,9 +1,12 @@
+
 -- Setup in karabiner to right_shift.
 HYPER = {'ctrl', 'shift', 'alt', 'cmd'}
 CCS = {'ctrl', 'shift', 'cmd'}
 
+local hs = hs
 hs.loadSpoon("SpoonInstall")
-Install=spoon.SpoonInstall
+local Install=spoon.SpoonInstall
+
 
 Install:andUse("ReloadConfiguration", {
     start = true,
@@ -21,7 +24,7 @@ Install:andUse("AppWindowSwitcher", {
     hotkeys = {
         ["iTerm2"]        = {HYPER, "t"},
         [{"Safari",
-        "Chromium"}]       = {HYPER, "s"},
+        "Google Chrome"}]       = {HYPER, "s"},
         [{"O", "o"}]       = {HYPER, "o"},
         [{"Code"}]       = {HYPER, "e"},
         [{"Obsidian"}]     = {HYPER, "n"},
@@ -33,8 +36,7 @@ Install:andUse("AppLauncher", {
     },
     hotkeys = {
         z = "Zoom.us",
-        t = "iTerm2",
-        c = "Calendar",
+        -- c = "Calendar",
         a = "Finder",
         m = "Mail",
     }
@@ -42,7 +44,7 @@ Install:andUse("AppLauncher", {
 
 Install:andUse("WindowGrid", {
     config = {
-        gridGeometries = hs.grid.setGrid('4x1'),
+        gridGeometries = hs.grid.setGrid('2x2'),
     },
     start = true,
     hotkeys = {
@@ -60,6 +62,8 @@ hs.fnutils.each({
   { key = 'p', fn = hs.grid.pushWindowPrevScreen                         },
   { key = 'right', fn = hs.window.filter.focusEast                         },
   { key = 'left', fn = hs.window.filter.focusWest                         },
+  { key = 'up', fn = hs.window.filter.focusNorth                         },
+  { key = 'down', fn = hs.window.filter.focusSouth                         },
   { key = 'h', fn = hs.grid.pushWindowLeft                               },
   { key = 'l', fn = hs.grid.pushWindowRight                              },
   { key = 'k', fn = hs.grid.pushWindowUp                                 },
@@ -70,5 +74,19 @@ hs.fnutils.each({
   { key = '-', fn = hs.grid.resizeWindowShorter                          },
 }, function(object)
   hs.hotkey.bind(HYPER, object.key, function() object.fn(object.args) end)
+end)
+
+local winF = require("window")
+
+-- Cycle through windows in 1
+hs.hotkey.bind(HYPER, '1', function() 
+    local geom = { x = 0, y = 0, w = 2, h = 2 }
+    winF.cycleBehind(geom)
+end)
+
+-- Cycle through windows in 2 
+hs.hotkey.bind(HYPER, '2', function() 
+    local geom = { x = 2, y = 0, w = 2, h = 2 }
+    winF.getWindowsBehind(geom)
 end)
 

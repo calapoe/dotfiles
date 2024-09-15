@@ -49,4 +49,8 @@ return require('packer').startup(function(use)
         { 'nvim-telescope/telescope.nvim' },
     }})
     use('github/copilot.vim')
+
+    use({'numToStr/Comment.nvim', config = function()
+        require('Comment').setup()
+    end})
 end)
