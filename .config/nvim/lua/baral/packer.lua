@@ -45,12 +45,22 @@ return require('packer').startup(function(use)
         }
     }
 
-    use({'ThePrimeagen/git-worktree.nvim', requires = { 
+    use({'ThePrimeagen/git-worktree.nvim', requires = {
         { 'nvim-telescope/telescope.nvim' },
     }})
+
     use('github/copilot.vim')
 
     use({'numToStr/Comment.nvim', config = function()
         require('Comment').setup()
     end})
+
+    use({'nvim-neotest/neotest', requires = {
+        {'nvim-lua/plenary.nvim'},
+        {"nvim-treesitter/nvim-treesitter"},
+        {"nvim-neotest/nvim-nio"},
+        {"antoinemadec/FixCursorHold.nvim"},
+        {"marilari88/neotest-vitest"},
+        {"nvim-neotest/neotest-plenary"},
+    }})
 end)

@@ -22,7 +22,7 @@ Install:andUse("ClipboardTool", {
 
 Install:andUse("AppWindowSwitcher", {
     hotkeys = {
-        ["iTerm2"]        = {HYPER, "t"},
+        ["iTerm"]        = {HYPER, "t"},
         [{"Safari",
         "Google Chrome"}]       = {HYPER, "s"},
         [{"O", "o"}]       = {HYPER, "o"},
