@@ -1,42 +1,79 @@
--- Ref: https://gist.github.com/micimize/bdcbc92b31ec7158c3b2c0186f0c53b6
-local hs = hs
+-- define window movement hotkeys
 
-local M = {
-    wins = hs.window,
-    wf = hs.window.filter,
-    g = hs.geometry,
-}
-function M.cycleBehind(geom)
-    print('here1')
+hs.fnutils.each({
+  { key = 'g', fn = hs.grid.pushWindowNextScreen                         },
+  { key = 'p', fn = hs.grid.pushWindowPrevScreen                         },
+  { key = 'right', fn = hs.window.filter.focusEast                         },
+  { key = 'left', fn = hs.window.filter.focusWest                         },
+  { key = 'up', fn = hs.window.filter.focusNorth                         },
+  { key = 'down', fn = hs.window.filter.focusSouth                         },
+  { key = ';', fn = hs.grid.pushWindowLeft                               },
+  { key = '\'', fn = hs.grid.pushWindowRight                              },
+  { key = 'k', fn = hs.grid.pushWindowUp                                 },
+  { key = 'j', fn = hs.grid.pushWindowDown                               },
+  { key = '[', fn = hs.grid.resizeWindowThinner                          },
+  { key = ']', fn = hs.grid.resizeWindowWider                            },
+  { key = '=', fn = hs.grid.resizeWindowTaller                           },
+  { key = '-', fn = hs.grid.resizeWindowShorter                          },
+}, function(object)
+  hs.hotkey.bind(HYPER, object.key, function() doWin(object.fn, object.args) end)
+end)
+
+-- set grid size and snap to grid hotkeys
+hs.grid.setGrid('4x4').setMargins({ x = 4, y = 4 })
+hs.fnutils.each({
+  { key = '7', geom = { x = 1.25, y = 0, w = 1.25, h = 4 }},
+  { key = '6', geom = { x = 0, y = 0, w = 1.25, h = 4 }},
+  { key = '8', geom = { x = 2.5, y = 0, w = 1.5, h = 4 }},
+  { key = '5', geom = { x = 3, y = 0, w = 1, h = 4 }},
+  { key = '4', geom = { x = 1, y = 0, w = 2, h = 4 }},
+  { key = '3', geom = { x = 0, y = 0, w = 1, h = 4 }},
+  { key = '2', geom = { x = 2, y = 0, w = 2, h = 4 }},
+  { key = '1', geom = { x = 0, y = 0, w = 2, h = 4 }},
+}, function(object)
+  hs.hotkey.bind(HYPER, object.key, function()  doWin(hs.grid.set, object.geom) end)
+end)
+
+-- launch and focus applications
+hs.fnutils.each({
+  { key = 's', apps = { 'Google Chrome', 'Safari' } },
+  { key = 'a', apps = { 'Finder'  } },
+  { key = 'y', apps = { 'Obsedin'     } },
+  { key = 'c', apps = { 'Calendar'     } },
+  { key = 'e', apps = { 'Code'              } },
+  { key = 't', apps = { 'iTerm'     } },
+}, function(object)
+  hs.hotkey.bind(HYPER, object.key, function() smartLaunchOrFocus(object.apps) end)
+end)
+
+--###############################################################################################
+--###############################################################################################
+--UTILS
+--###############################################################################################
+--###############################################################################################
+function doWin(fn, options)
+  local win = hs.window.focusedWindow()
+  if win then
+    fn(win, options, win:screen())
+  else
+    hs.alert.show("No focused window.")
+  end
 end
 
-function M.getWindowsBehind(geom)
-    local currWin = M.wins.frontmostWindow()
-    -- local wins = M.wins.allWindows()
-    local wf = M.wf.copy(M.wf.defaultCurrentSpace)
-    local wins = wf:getWindows()
-    for i = 1, #wins do
-        print('Window behind is: ........', wins[i])
-        x1, y1 = currWin:frame().x, currWin:frame().y
-        w1, h1 = currWin:frame().w, currWin:frame().h
-        x2, y2 = wins[i]:frame().x, wins[i]:frame().y
-        w2, h2 = wins[i]:frame().w, wins[i]:frame().h
-        if x1 + w1 <= x2 or x2 + w2 <= x1 then
-            print('No overlap')
-        end
-
-        if y1 + h1 <= y2 or y2 + h2 <= y1 then
-            print('No overlap')
-        end
-
-        wins[i + 1]:focus()
-        break
+function smartLaunchOrFocus(apps)
+  local app = hs.application.frontmostApplication()
+  local appName = app:name()
+  local appPath = app:path()
+  local appIsRunning = false
+  for i, name in ipairs(apps) do
+    if appName == name then
+      appIsRunning = true
+      break
     end
+  end
+  if appIsRunning then
+    hs.application.launchOrFocus(appPath)
+  else
+    hs.application.launchOrFocus(apps[1])
+  end
 end
-
-function M.interects(r1, r2)
-    print(r1, r2)
-end
-
-return M
-

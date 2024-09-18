@@ -41,7 +41,7 @@ require('mason-lspconfig').setup({
 							version = 'LuaJIT'
 						},
 						diagnostics = {
-							globals = {'vim'},
+							globals = {'vim', 'hs'},
 						},
 						workspace = {
 							library = {
