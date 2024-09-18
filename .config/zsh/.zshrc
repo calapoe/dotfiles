@@ -10,6 +10,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/third_party/scripts
 export PATH=$PATH:"$(brew --prefix coreutils)/libexec/gnubin"
 
+export LIBTOOLIZE=glibtoolize
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -58,6 +60,8 @@ alias vi='nvim'
 alias pom='flatpak run org.gnome.Solanum'
 alias ls='ls --color=auto'
 
+alias aws='aws --profile admin-1 --region us-east-1'
+
 # Repo for configs.
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -65,7 +69,17 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    alias meld="/opt/homebrew/bin/meld"
+    # alias meld="/opt/homebrew/bin/meld"
+
+    # Add brew's completions to zsh
+    if type brew &>/dev/null
+    then
+      FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+      autoload -Uz compinit
+      compinit
+    fi
+
 elif [[ "$OSTYPE" == "fedora"* ]]; then
     # Fedora
     # Add your Fedora specific configurations here
