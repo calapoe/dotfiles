@@ -1,0 +1,21 @@
+[user]
+	name = Nischal B
+	email = baralnisc@gmail.com
+[alias]
+  d = diff --cached
+[core]
+  edior = nvim
+[diff]
+  tool = meld
+[difftool "meld"]
+  cmd = meld $LOCAL $REMOTE
+[merge]
+  tool = meld
+[mergetool "meld"]
+  cmd = meld $LOCAL $BASE $REMOTE --output $MERGED
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+  trustExitCode = true

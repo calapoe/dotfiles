@@ -4,7 +4,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "End to Command Right",
+                        "description": "End to Left Command Right",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -48,7 +48,7 @@
                                 "to": [
                                     {
                                         "key_code": "right_arrow",
-                                        "modifiers": "command"
+                                        "modifiers": "left_command"
                                     }
                                 ],
                                 "type": "basic"
@@ -56,7 +56,7 @@
                         ]
                     },
                     {
-                        "description": "Home to Command Left",
+                        "description": "Home to Left Command Left",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -100,7 +100,7 @@
                                 "to": [
                                     {
                                         "key_code": "left_arrow",
-                                        "modifiers": "command"
+                                        "modifiers": "left_command"
                                     }
                                 ],
                                 "type": "basic"

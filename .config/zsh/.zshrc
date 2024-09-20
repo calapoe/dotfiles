@@ -34,6 +34,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source <(kubectl completion zsh)
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
@@ -58,7 +59,7 @@ alias hypr-edit='vi .config/hypr/hyprland.conf'
 alias Node.js='node'
 alias vi='nvim'
 alias pom='flatpak run org.gnome.Solanum'
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -al'
 
 alias aws='aws --profile admin-1 --region us-east-1'
 

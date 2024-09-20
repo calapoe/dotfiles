@@ -3,14 +3,14 @@
 hs.fnutils.each({
   { key = 'g', fn = hs.grid.pushWindowNextScreen                         },
   { key = 'p', fn = hs.grid.pushWindowPrevScreen                         },
-  { key = 'right', fn = hs.window.filter.focusEast                         },
-  { key = 'left', fn = hs.window.filter.focusWest                         },
-  { key = 'up', fn = hs.window.filter.focusNorth                         },
-  { key = 'down', fn = hs.window.filter.focusSouth                         },
-  { key = ';', fn = hs.grid.pushWindowLeft                               },
-  { key = '\'', fn = hs.grid.pushWindowRight                              },
-  { key = 'k', fn = hs.grid.pushWindowUp                                 },
-  { key = 'j', fn = hs.grid.pushWindowDown                               },
+  { key = '\'', fn = hs.window.filter.focusEast                         },
+  { key = ';', fn = hs.window.filter.focusWest                         },
+  { key = '9', fn = hs.window.filter.focusNorth                         },
+  { key = '/', fn = hs.window.filter.focusSouth                         },
+  { key = 'left', fn = hs.grid.pushWindowLeft                               },
+  { key = 'right', fn = hs.grid.pushWindowRight                              },
+  { key = 'up', fn = hs.grid.pushWindowUp                                 },
+  { key = 'down', fn = hs.grid.pushWindowDown                               },
   { key = '[', fn = hs.grid.resizeWindowThinner                          },
   { key = ']', fn = hs.grid.resizeWindowWider                            },
   { key = '=', fn = hs.grid.resizeWindowTaller                           },
@@ -20,11 +20,11 @@ hs.fnutils.each({
 end)
 
 -- set grid size and snap to grid hotkeys
-hs.grid.setGrid('4x4').setMargins({ x = 4, y = 4 })
+hs.grid.setGrid('4x4').setMargins({ x = 2, y = 2 })
 hs.fnutils.each({
-  { key = '7', geom = { x = 1.25, y = 0, w = 1.25, h = 4 }},
-  { key = '6', geom = { x = 0, y = 0, w = 1.25, h = 4 }},
-  { key = '8', geom = { x = 2.5, y = 0, w = 1.5, h = 4 }},
+  { key = '7', geom = { x = 1.125, y = 0, w = 1.125, h = 4 }},
+  { key = '6', geom = { x = 0, y = 0, w = 1.125, h = 4 }},
+  { key = '8', geom = { x = 2.25, y = 0, w = 1.75, h = 4 }},
   { key = '5', geom = { x = 3, y = 0, w = 1, h = 4 }},
   { key = '4', geom = { x = 1, y = 0, w = 2, h = 4 }},
   { key = '3', geom = { x = 0, y = 0, w = 1, h = 4 }},
