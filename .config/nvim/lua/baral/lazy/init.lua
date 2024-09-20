@@ -5,7 +5,9 @@ return {
         name = "plenary"
     },
 
-    "eandrju/cellular-automaton.nvim",
+  "github/copilot.vim",
+  "eandrju/cellular-automaton.nvim",
+  "ThePrimeagen/harpoon",
 }
 
 -- {
@@ -34,7 +36,7 @@ return {
 --   }
 --   },
 --
---   'github/copilot.vim',
+--   
 --
 --   {'numToStr/Comment.nvim', config = function()
 --     require('Comment').setup()

@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.localmapleader = ","
+vim.g.maplocalleader = ","
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -39,10 +39,6 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
-vim.keymap.set("n", "<leader>sh", "<cmd><C-w>s")
-vim.keymap.set("n", "<leader>sv", "<cmd><C-w>v")
-vim.keymap.set("n", "<leader>sx", ":close<CR>")
 
 vim.keymap.set("n", "zz", "<C-W>_<C-W>|")
 vim.keymap.set("n", "zo", "<C-W>=")
