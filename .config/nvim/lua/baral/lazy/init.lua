@@ -8,6 +8,7 @@ return {
   "github/copilot.vim",
   "eandrju/cellular-automaton.nvim",
   "ThePrimeagen/harpoon",
+  "echasnovski/mini.nvim",
 }
 
 -- {
