@@ -1,4 +1,7 @@
 -- define window movement hotkeys
+HYPER = {'ctrl', 'shift', 'alt', 'cmd'}
+
+hs.application.enableSpotlightForNameSearches(true)
 
 hs.fnutils.each({
   { key = 'g', fn = hs.grid.pushWindowNextScreen                         },
@@ -137,6 +140,13 @@ function smartLaunchOrFocus(launchApps)
     -- concat with all running windows
     hs.fnutils.concat(runningWindows, standardWindows);
   end)
+
+  for key, val in pairs(runningApps) do
+    print(key, val)
+    for i, name in ipairs(val) do
+      print(i, name)
+    end
+  end
 
   if #runningApps == 0 then
     -- if no apps are running then launch first one in list
