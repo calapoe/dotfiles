@@ -26,10 +26,6 @@ return {
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
     vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 
-    require("telescope").load_extension("git_worktree")
-    vim.keymap.set('n', '<leader>gt', function()
-      require("telescope").extensions.git_worktree.git_worktrees()
-    end)
   end
 }
 
