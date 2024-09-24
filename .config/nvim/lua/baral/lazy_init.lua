@@ -30,3 +30,10 @@ require('lazy').setup({
   spec = "baral.lazy",
   change_detection = { notify = false }
 })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TelescopePreviewerLoaded",
+  callback = function(args)
+      vim.wo.wrap = true
+  end,
+})

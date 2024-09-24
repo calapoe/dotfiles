@@ -6,6 +6,18 @@ return {
   "github/copilot.vim",
   "eandrju/cellular-automaton.nvim",
   "ThePrimeagen/harpoon",
+  {'ThePrimeagen/git-worktree.nvim',
+    config = function()
+      require("git-worktree").setup({
+        change_directory_command = "tcd",
+      })
+
+      local worktree = require('git-worktree')
+      vim.keymap.set('n', '<leader>cw', worktree.create_worktree(
+        {vim.fn.input("path> ")}, {vim.fn.input("branch> ")}, "origin"))
+
+    end,
+  },
   "echasnovski/mini.nvim",
   {
     'stevearc/oil.nvim',
