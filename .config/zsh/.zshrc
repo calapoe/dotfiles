@@ -60,8 +60,12 @@ alias Node.js='node'
 alias vi='nvim'
 alias pom='flatpak run org.gnome.Solanum'
 alias ls='ls --color=auto -al'
-
+alias docker='sudo docker'
 alias aws='aws --profile admin-1 --region us-east-1'
+
+function docker_exec() {
+  docker exec -t -i $1 bash
+}
 
 # Repo for configs.
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -102,3 +106,7 @@ done
 
 # Load z.sh
 [ -f /opt/homebrew/etc/profile.d/z.sh ] && . /opt/homebrew/etc/profile.d/z.sh
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+

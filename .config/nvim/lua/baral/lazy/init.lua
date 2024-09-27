@@ -7,5 +7,7 @@ return {
   "eandrju/cellular-automaton.nvim",
   "ThePrimeagen/harpoon",
   "echasnovski/mini.nvim",
+  "numToStr/Comment.nvim",
+  "zoubin/vim-gotofile",
 }
 

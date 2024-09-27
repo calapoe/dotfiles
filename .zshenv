@@ -9,3 +9,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export EDITOR=nvim
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# docker use arm64
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+

@@ -27,3 +27,10 @@ autocmd('LspAttach', {
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "oil://*" },
+  callback = function()
+    vim.keymap.set("n", "p", "<cmd>Oil --float .. <cr>", {})
+  end,
+})
