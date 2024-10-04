@@ -6,6 +6,13 @@ vim.keymap.set("n", "-", vim.cmd.Ex)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>w", "<cmd>w!<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>q!<cr>")
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n",    "<Tab>",         ">>",  opts)
+vim.keymap.set("n",    "<S-Tab>",       "<<",  opts)
+vim.keymap.set("v",    "<Tab>",         ">gv", opts)
+vim.keymap.set("v",    "<S-Tab>",       "<gv", opts)
 
 vim.keymap.set("n", "x", '"_x')
 

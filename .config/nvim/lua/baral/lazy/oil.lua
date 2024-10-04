@@ -9,6 +9,7 @@ return {
   config = function()
     require("oil").setup()
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "_", "<CMD>Oil --float<CR>", { desc = "Open parent directory in floating window" })
   end,
   keymaps = {
     ["<C-p>"] = false,

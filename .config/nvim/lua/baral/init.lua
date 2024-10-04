@@ -31,6 +31,5 @@ vim.g.netrw_winsize = 25
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = { "oil://*" },
   callback = function()
-    vim.keymap.set("n", "p", "<cmd>Oil --float .. <cr>", {})
   end,
 })

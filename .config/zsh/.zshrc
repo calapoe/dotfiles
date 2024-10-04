@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export JAVA_HOME=/opt/jdk-21.0.3
 export LD_LIBRARY_PATH=/usr/lib64
 
 # Path to your oh-my-zsh installation.
@@ -75,38 +74,52 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH=$PATH:"$(brew --prefix coreutils)/libexec/gnubin"
   # Mac OSX
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  # alias meld="/opt/homebrew/bin/meld"
 
-    # Add brew's completions to zsh
-    if type brew &>/dev/null
-    then
-      FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  fpath+=zfunc
+  autoload -Uz compinit && compinit
 
-      autoload -Uz compinit
-      compinit
-    fi
+  # Add brew's completions to zsh
+  if type brew &>/dev/null
+  then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-  elif [[ "$OSTYPE" == "fedora"* ]]; then
-    # Fedora
-    # Add your Fedora specific configurations here
-    alias meld="flatpak run org.gnome.meld"
-fi
+    autoload -Uz compinit
+    compinit
+  fi
+  # The following lines were added by compinstall
+  zstyle :compinstall filename '/Users/baral/.config/zsh/.zshrc'
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/baral/.config/zsh/.zshrc'
-
-autoload -Uz compinit
-compinit -d ${ZDOTDIR}/zcompdump
-zstyle ':completion:*' cache-path "${ZDOTDIR}/cache"
-## separate files for easier and quicker editing:
-for file in $ext_files; do
-  [[ -f ${ZDOTDIR}/${file} ]] && source ${ZDOTDIR}/${file}
-done
-# End of lines added by compinstall
+  autoload -Uz compinit
+  compinit -d ${ZDOTDIR}/zcompdump
+  zstyle ':completion:*' cache-path "${ZDOTDIR}/cache"
+  ## separate files for easier and quicker editing:
+  for file in $ext_files; do
+    [[ -f ${ZDOTDIR}/${file} ]] && source ${ZDOTDIR}/${file}
+  done
+  # End of lines added by compinstall
 
 # Load z.sh
-[ -f /opt/homebrew/etc/profile.d/z.sh ] && . /opt/homebrew/etc/profile.d/z.sh
+  [ -f /opt/homebrew/etc/profile.d/z.sh ] && . /opt/homebrew/etc/profile.d/z.sh
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  export NVM_DIR="$HOME/.config/nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+  export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version
+
+  #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+elif [[ "$OSTYPE" == "fedora"* ]]; then
+  # Fedora
+  # Add your Fedora specific configurations here
+  alias meld="flatpak run org.gnome.meld"
+fi
+
+
+
+# Created by `pipx` on 2024-10-01 22:38:46
+export PATH="$PATH:/Users/baral/.local/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

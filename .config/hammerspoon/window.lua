@@ -19,36 +19,71 @@ hs.fnutils.each({
   { key = '=', fn = hs.grid.resizeWindowTaller                           },
   { key = '-', fn = hs.grid.resizeWindowShorter                          },
 }, function(object)
-  hs.hotkey.bind(HYPER, object.key, function() doWin(object.fn, object.args) end)
-end)
+    hs.hotkey.bind(HYPER, object.key, function() doWin(object.fn, object.args) end)
+  end)
 
 -- set grid size and snap to grid hotkeys
 hs.grid.setGrid('4x4').setMargins({ x = 1.5, y = 1.5 })
 hs.fnutils.each({
-  { key = '7', geom = { x = 1.125, y = 0, w = 1.125, h = 4 }},
-  { key = '6', geom = { x = 0, y = 0, w = 1.125, h = 4 }},
-  { key = '8', geom = { x = 2.25, y = 0, w = 1.75, h = 4 }},
-  { key = '3', geom = { x = 2.6, y = 0, w = 1.3, h = 4 }},
-  { key = '2', geom = { x = 1.3, y = 0, w = 1.3, h = 4 }},
+  { key = '7', geom = { x = 3, y = 0, w = 1, h = 4 }},
+  { key = '8', geom = { x = 1.125, y = 0, w = 3, h = 4 }},
+  { key = '4', geom = { x = 2, y = 0, w = 1.25, h = 4 }},
+  { key = '3', geom = { x = 2, y = 0, w = 1, h = 4 }},
+  { key = '2', geom = { x = 0.75, y = 0, w = 1.25, h = 4 }},
   { key = '1', geom = { x = 0, y = 0, w = 1.3, h = 4 }},
-  { key = '5', geom = { x = 2, y = 0, w = 2, h = 4 }},
-  { key = '6', geom = { x = 0, y = 0, w = 2, h = 4 }},
+  { key = '5', geom = { x = 0.5, y = 0.5, w = 1.5, h = 3.25 }},
+  { key = '6', geom = { x = 0.25, y = 0.75, w = 1.5, h = 3.25 }},
 }, function(object)
-  hs.hotkey.bind(HYPER, object.key, function()  doWin(hs.grid.set, object.geom) end)
-end)
+    hs.hotkey.bind(HYPER, object.key, function()  doWin(hs.grid.set, object.geom) end)
+  end)
 
 -- launch and focus applications
 hs.fnutils.each({
-  { key = 's', apps = { 'Google Chrome', 'Safari' } },
+  { key = 's', apps = { 'Safari' } },
   { key = 'a', apps = { 'Finder'  } },
   { key = 'o', apps = { 'Obsidian'     } },
+  { key = 'x', apps = { 'ChatGPT'     } },
+  { key = 'v', apps = { 'Google Chrome'     } },
   { key = 'c', apps = { 'Calendar', 'Reminders'     } },
   { key = 'e', apps = { 'Code'              } },
   { key = 'u', apps = { 'UTM'              } },
+  { key = 'i', apps = { 'IntelliJ'              } },
   { key = 't', apps = { 'iTerm'     } },
 }, function(object)
-  hs.hotkey.bind(HYPER, object.key, function() smartLaunchOrFocus(object.apps) end)
-end)
+    hs.hotkey.bind(HYPER, object.key, function() smartLaunchOrFocus(object.apps) end)
+  end)
+
+-- cycle windows in same coordinates
+function cycleWindowsInSameCoordinates()
+  print("here")
+  local focusedWindow = hs.window.focusedWindow() -- Get the currently focused window
+  if not focusedWindow then return end
+
+  local focusedFrame = focusedWindow:frame() -- Get the frame of the focused window
+  local allWindows = hs.window.allWindows()  -- Get all windows
+  local matchingWindows = {}
+
+  -- Find windows that have the same frame as the focused window
+  for _, win in ipairs(allWindows) do
+    if win:frame():equals(focusedFrame) and win ~= focusedWindow then
+      table.insert(matchingWindows, win)
+    end
+  end
+
+  -- Cycle to the next window in the matching windows list
+  if #matchingWindows > 0 then
+    local nextWindow = matchingWindows[1] -- Take the first window from the list
+    nextWindow:focus()                    -- Focus the window
+
+    -- Unminimize if minimized
+    if nextWindow:isMinimized() then
+      nextWindow:unminimize()
+    end
+  else
+    hs.alert.show("No windows found with the same coordinates")
+  end
+end
+hs.hotkey.bind(HYPER, "z", cycleWindowsInSameCoordinates)
 
 --###############################################################################################
 --###############################################################################################
@@ -159,7 +194,7 @@ function smartLaunchOrFocus(launchApps)
     local currentIndex = hs.fnutils.indexOf(runningWindows, frontmostWindow)
 
     if not currentIndex then
-      -- if none of them is selected focus the first one
+      -- if none of them is shttps://finviz.com/#google_vignetteelected focus the first one
       runningWindows[1]:focus()
     else
       -- otherwise cycle through all the windows
